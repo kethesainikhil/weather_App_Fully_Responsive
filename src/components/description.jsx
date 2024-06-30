@@ -4,6 +4,7 @@ import "./description.css";
 import { FaArrowUp, FaArrowDown, FaWind } from "react-icons/fa";
 import { BiHappy } from "react-icons/bi";
 import { MdCompress, MdOutlineWaterDrop } from "react-icons/md";
+import Button from "./Button";
 
 const Descriptions = ({ weather, units }) => {
   const tempUnit = units === "metric" ? "°C" : "°F";
@@ -52,6 +53,7 @@ const Descriptions = ({ weather, units }) => {
       data: weather.speed.toFixed(),
       unit: windUnit,
     },
+
   ];
   return (
     <div className="section section__descriptions">

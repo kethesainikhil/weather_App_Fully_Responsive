@@ -1,15 +1,14 @@
 import React from 'react'
-import hotBg from "../assets/hot.jpg";
-import coldBg from "../assets/cold.jpg";
 import Descriptions from "../components/description";
 import { useEffect, useState } from "react";
 import { getFormattedWeatherData } from "../weatherService";
 import ErrorComponent from "../components/ErrorComponent";
+import SubHeading from './SubHeading';
+import Button from './Button';
 const Main = () => {
     const [city, setCity] = useState("Paris");
     const [weather, setWeather] = useState(null);
     const [units, setUnits] = useState("metric");
-    const [bg, setBg] = useState(hotBg);
     const [checkData,setcheckData] = useState(false);
     const[searchCity,setSearchCity] = useState("paris");
     useEffect(() => {
@@ -22,9 +21,7 @@ const Main = () => {
   
         // dynamic bg
         const threshold = units === "metric" ? 20 : 60;
-  
-        if (data?.temp <= threshold && units === "metric") setBg(coldBg);
-        else setBg(hotBg);
+
         }
         else{
           setcheckData(false)
@@ -57,15 +54,16 @@ const Main = () => {
       setSearchCity(city);
     }
   return (
-    checkData ? <div>
-    <div className="app" style={{ backgroundImage: `url(${bg})` }}>
+    checkData ? <div className='sm:bg-slate-400'>
+    <div className="app  " >
     <div className="overlay">
       {weather && (
-        <div className="container">
-          <div className="section section__inputs">
+        <div className="container  ">
+          <div className="section text-black flex flex-col sm:flex-row gap-4  items-center justify-center   sm:gap-14 section__inputs">
             <input
               onKeyDown={enterKeyPressed}
               type="text"
+              className='text-black'
               name="city"
               onChange={(e) => handleInput(e)}
               
@@ -73,11 +71,20 @@ const Main = () => {
             />
             <button onClick={handleSubmit}>search</button>
             <button onClick={(e) => handleUnitsClick(e)}>°F</button>
+            <div>
+              <Button className="sm:ml-20 hover:bg-red-700" title="Set Trigger" path="/trigger" />
+            </div>
+           
+          </div>
+
+          <div>
+            <SubHeading />
           </div>
 
           
           <div className="section section__temperature">
             <div className="icon">
+
               <h3>{`${weather.name}, ${weather.country}`}</h3>
               <img src={weather.iconURL} alt="weatherIcon" />
               <h3>{weather.description}</h3>
@@ -94,6 +101,7 @@ const Main = () => {
         </div>
       )}
     </div>
+
   </div>
   </div>:<ErrorComponent />
   )
