@@ -1,5 +1,5 @@
 import React from 'react'
-import DailyLineChart from './Chart'
+import  { BasicLineChartDesktop } from './Chart'
 import BasicLineChart from './Chart'
 import { BarChart } from '@mui/x-charts/BarChart';
 
@@ -13,7 +13,7 @@ const ResultPage = () => {
               <h3 className='text-xl capitalize'>Very cold Temperature right now</h3>
             </div>
           </div>
-          <div className='flex justify-between my-10'>
+          <div className='flex sm:flex-row flex-col justify-between my-10'>
           <div>
             <MixedBarChart />
           </div>
@@ -22,8 +22,14 @@ const ResultPage = () => {
 
           </div>
           </div>
+          <div className='sm:flex hidden'>
+          <BasicLineChart />
+          </div>
+          <div className='sm:hidden flex'>
+          <BasicLineChartDesktop />
+          </div>
 
-        <BasicLineChart />
+ 
     </div>
   )
 }
@@ -47,7 +53,7 @@ const xLabels = [
 export  function MixedBarChart() {
   return (
     <BarChart
-      width={500}
+      width={400}
       height={300}
       series={[
         { data: pData, label: 'pv', stack: 'stack1' },

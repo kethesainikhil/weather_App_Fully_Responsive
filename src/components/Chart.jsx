@@ -15,3 +15,17 @@ export default function BasicLineChart() {
     />
   );
 }
+export  function BasicLineChartDesktop() {
+  return (
+    <LineChart
+      xAxis={[{ data: [1, 2, 3, 5, 8, 10,12] }]}
+      series={[
+        {
+          data: [2, 5.5, 2, 8.5, 1.5, 5,10,],
+        },
+      ]}
+      width={400}
+      height={300}
+    />
+  );
+}
